@@ -1,0 +1,54 @@
+.container {
+    width: 300px;
+    padding: 20px;
+    background-color: #222;
+    display: grid;
+    gap: 20px;
+    height: 800px;
+    align-content: flex-start;
+}
+.item {
+    height: 50px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    position: relative;
+    cursor: move;
+    user-select: none;
+    transition: margin-bottom .5s linear;
+}
+.item::before {
+    position: absolute;
+    content: attr(title);
+    top: 10px;
+    right: 10px;
+    color: springgreen;
+    font-weight: bold;
+    text-shadow: -1px -1px 1px #222, -1px 1px 1px #222, 1px -1px 1px #222, 1px 1px 1px #222, 0 -1px 1px #222, 0 1px 1px #222, -1px 0 1px #222, 1px 0 1px #222;
+}
+.item::after {
+    min-height: 0;
+    transition: min-height .5s linear;
+}
+.isDragging {
+    background-color: cadetblue;
+}
+.dragOver {
+    margin-bottom: 70px;
+    position: relative;
+}
+.dragOver::after {
+    content: "drop here";
+    min-height: 50px;
+    border: 1px solid #ddd;
+    color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    bottom: -70px;
+    border-radius: inherit;
+}
