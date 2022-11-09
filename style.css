@@ -17,7 +17,6 @@
     position: relative;
     cursor: move;
     user-select: none;
-    transition: margin-bottom .5s linear;
 }
 .item::before {
     position: absolute;
@@ -38,6 +37,7 @@
 .dragOver {
     margin-bottom: 70px;
     position: relative;
+    transition: margin-bottom .5s linear;
 }
 .dragOver::after {
     content: "drop here";

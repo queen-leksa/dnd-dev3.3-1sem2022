@@ -1,6 +1,7 @@
 const items = document.querySelectorAll(".item");
 const block = document.querySelector(".container");
 let dragEl = null;
+let dropEl = null;
 
 items.forEach(item => {
     item.draggable = true;
@@ -9,11 +10,15 @@ items.forEach(item => {
         e.target.classList.add("isDragging");
     });
     item.addEventListener("dragend", e => {
-        e.target.classList.remove("isDragging");
-        dragEl = null;
+        setTimeout(function() {
+            e.target.classList.remove("isDragging");
+            dragEl = null;
+        }, 500)
+
     });
     item.addEventListener("dragover", e => {
         e.preventDefault();
+        dropEl = e.target;
         e.target.classList.add("dragOver");
     })
     item.addEventListener("dragleave", e => {
@@ -38,5 +43,11 @@ block.addEventListener("drop", function(e) {
     e.preventDefault();
     e.stopPropagation();
     // let dropTag = e.dataTransfer.getData("text/html");
-    block.appendChild(dragEl);
+    if (dropEl === this) {
+        this.appendChild(dragEl);
+    } else {
+        this.insertBefore(dragEl, dropEl.nextElementSibling);
+        dropEl.classList.remove("dragOver");
+        dropEl = null;
+    }
 });
